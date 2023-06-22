@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YoutubeSearch</name>
+    </assembly>
+    <members>
+        <member name="T:YoutubeSearch.VideoInformation">
+            <summary>
+            These information represent all information queried for a single video
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Title">
+            <summary>
+            Title of the video
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Author">
+            <summary>
+            Name of the Youtube Channel
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Description">
+            <summary>
+            Description of the video as shown in the browser. Empty string if not provided by Youtube
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Duration">
+            <summary>
+            Duration of the video (hh:mm:ss)
+            Only for non-livestreams
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Url">
+            <summary>
+            Full browser url to the video
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.Thumbnail">
+            <summary>
+            url to the thumbnail (quality is "mqdefault")
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.NoDescription">
+            <summary>
+            True if video has no description.
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.NoAuthor">
+            <summary>
+            Is true when the query could not determin an author for this video
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.ViewCount">
+            <summary>
+            Number of views at the moment of the request. This is the number which is shown in the browser and not necessarily the true view number.
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoInformation.IsLivestream">
+            <summary>
+            indicates if the shown video is a normal video or if it is a livestream
+            Duration property is not available for livestreams
+            </summary>
+        </member>
+        <member name="T:YoutubeSearch.OutdatedPatternException">
+            <summary>
+            Thrown when the youtube api has changed to a degree, that the regex cannot parse the result anymore.
+            This exception marks the packages as broken and needs to be reported on Github
+            </summary>
+        </member>
+        <member name="M:YoutubeSearch.OutdatedPatternException.#ctor">
+            <summary>
+            Default constructor without arguments
+            </summary>
+        </member>
+        <member name="M:YoutubeSearch.OutdatedPatternException.#ctor(System.String)">
+            <summary>
+            Constructor containing a custom exception message
+            </summary>
+            <param name="message">custom message</param>
+        </member>
+        <member name="M:YoutubeSearch.OutdatedPatternException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor with message and inner exception
+            </summary>
+            <param name="message">custom message</param>
+            <param name="innerException">contained exception</param>
+        </member>
+        <member name="T:YoutubeSearch.VideoSearch">
+            <summary>
+            VideoSearch, this class handles the video query. Encoding should be specified before performing a query
+            </summary>
+        </member>
+        <member name="P:YoutubeSearch.VideoSearch.encoding">
+            <summary>
+            Specify the used encoding. Recommended: ASCII, UTF-8
+            </summary>
+        </member>
+        <member name="F:YoutubeSearch.VideoSearch.exceptionQueue">
+            <summary>
+            holds occured pattern exceptions. These are thrown if the youtube-api changes and properties cannot be decoded anymore
+            The queue is only filled with exceptions, if exceptions are surpressed by calling arguments
+            </summary>
+        </member>
+        <member name="M:YoutubeSearch.VideoSearch.SearchQueryTaskAsync(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Doing asynchronous search query with given parameters. Returns a List object.
+            </summary>
+            <param name="querystring"></param>
+            <param name="querypages">number of pages to query</param>
+            <param name="querypagesOffset">offset for querypages</param>
+            <param name="surpressParsingExceptions">do not throw on parsing errors, exceptions can be accesed at exceptionQueue. Only recoverable parsing exceptions are surpressed</param>
+            <exception cref="T:YoutubeSearch.OutdatedPatternException">youtube api had breaking changes</exception>
+            <exception cref="T:System.Net.WebException">web request failure</exception>
+            <returns></returns>
+        </member>
+        <member name="M:YoutubeSearch.VideoSearch.SearchQuery(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Doing search query with given parameters. Returns a List object.
+            </summary>
+            <param name="querystring"></param>
+            <param name="querypages">number of pages to query</param>
+            <param name="querypagesOffset">offset for querypages</param>
+            <param name="surpressParsingExceptions">do not throw on parsing errors, exceptions can be accesed at exceptionQueue. Only recoverable parsing exceptions are surpressed</param>
+            /// <exception cref="T:YoutubeSearch.OutdatedPatternException">youtube api had breaking changes</exception>
+            /// <exception cref="T:System.Net.WebException">web request failure</exception>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
